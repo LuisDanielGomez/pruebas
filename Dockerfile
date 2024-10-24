@@ -1,24 +1,16 @@
 # Usa una imagen base de OpenJDK 17
-FROM openjdk:17-jdk-slim AS builder
+FROM openjdk:17-jdk-slim
 
 # Establece el directorio de trabajo
 WORKDIR /app
 
-# Copia los archivos de construcción (incluyendo el build.gradle y otros archivos necesarios)
+# Copia todos los archivos necesarios al contenedor
 COPY . .
 
 # Da permisos de ejecución al script gradlew
 RUN chmod +x gradlew
 
-# Ejecuta el comando de Gradle para construir el proyecto
-RUN ./gradlew build --no-daemon
+# Instala las dependencias y ejecuta la aplicación
+CMD ["./gradlew", "bootRun"]
 
-# Etapa final
-FROM openjdk:17-jdk-slim
-
-# Copia el archivo JAR construido en la etapa anterior
-COPY --from=builder /app/build/libs/app.jar app.jar
-
-# Comando para ejecutar el archivo JAR
-ENTRYPOINT ["java", "-jar", "app.jar"]
 
