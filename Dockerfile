@@ -14,7 +14,7 @@ RUN ./gradlew build --no-daemon
 FROM openjdk:17-jdk-slim
 
 # Copia el archivo JAR construido en la etapa anterior
-COPY --from=builder /app/build/libs/app-0.2024.1-SNAPSHOT.jar app.jar
+COPY --from=builder /app/build/libs/app.jar app.jar
 
 # Comando para ejecutar el archivo JAR
 ENTRYPOINT ["java", "-jar", "app.jar"]
