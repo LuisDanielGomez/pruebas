@@ -7,6 +7,9 @@ WORKDIR /app
 # Copia los archivos de construcción (incluyendo el build.gradle y otros archivos necesarios)
 COPY . .
 
+# Da permisos de ejecución al script gradlew
+RUN chmod +x gradlew
+
 # Ejecuta el comando de Gradle para construir el proyecto
 RUN ./gradlew build --no-daemon
 
