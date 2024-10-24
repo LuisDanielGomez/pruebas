@@ -2,7 +2,7 @@
 FROM openjdk:17-jdk-slim
 
 # Copia el archivo JAR en el contenedor
-COPY app/build/libs/app-plain.jar app.jar
+COPY app/build/libs/app.jar app.jar
 
 # Comando para ejecutar el archivo JAR
 ENTRYPOINT ["java", "-jar", "app.jar"]
